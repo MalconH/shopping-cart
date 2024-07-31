@@ -1,0 +1,27 @@
+.title {
+  font-size: 2.5rem;
+  cursor: default;
+}
+
+.title .jiggle {
+  display: inline-block;
+
+  &:hover {
+    animation: jiggle 0.5s ease-in-out both;
+    animation-iteration-count: 3;
+  }
+}
+
+@keyframes jiggle {
+  0% {
+    transform: rotate(-3deg);
+  }
+
+  50% {
+    transform: rotate(3deg);
+  }
+
+  100% {
+    transform: rotate(-3deg);
+  }
+}
