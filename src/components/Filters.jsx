@@ -1,3 +1,14 @@
+// Import ShadcnUI components
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+// End of ShadcnUI components
+
 import { useId } from "react";
 import "./Filters.css";
 import { useFilters } from "../hooks/useFilters";
@@ -14,8 +25,8 @@ export function Filters() {
     changeFilter("minPrice", e.target.value);
   };
 
-  const handleChangeCategory = (e) => {
-    changeFilter("category", e.target.value);
+  const handleChangeCategory = (value) => {
+    changeFilter("category", value);
   };
 
   return (
@@ -35,12 +46,16 @@ export function Filters() {
         <span>{minPrice}</span>
       </div>
       <div>
-        <label htmlFor={categoryId}>Categoría</label>
-        <select name="category" id={categoryId} onChange={handleChangeCategory}>
-          <option value="all">Todo</option>
-          <option value="laptops">Notebooks</option>
-          <option value="smartphones">Celulares</option>
-        </select>
+        <Select onValueChange={handleChangeCategory}>
+          <SelectTrigger id={categoryId} className="w-[180px]" aria-label="categoría">
+            <SelectValue placeholder="Categoría" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todo</SelectItem>
+            <SelectItem value="laptops">Notebooks</SelectItem>
+            <SelectItem value="smartphones">Celulares</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
