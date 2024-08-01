@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 
 // End of ShadcnUI components
 
@@ -21,8 +22,8 @@ export function Filters() {
 
   const { minPrice } = filters;
 
-  const handleChangeMinPrice = (e) => {
-    changeFilter("minPrice", e.target.value);
+  const handleChangeMinPrice = (value) => {
+    changeFilter("minPrice", value);
   };
 
   const handleChangeCategory = (value) => {
@@ -33,16 +34,17 @@ export function Filters() {
     <div className="filters">
       <div>
         <label htmlFor={minPriceId}>Precio mínimo</label>
-        <input
-          type="range"
-          name="min-price"
-          id={minPriceId}
-          min={0}
+
+        <Slider
+          className="w-[180px]"
+          defaultValue={[0]}
           max={1000}
           step={10}
-          onChange={handleChangeMinPrice}
-          value={minPrice}
+          value={[minPrice]}
+          onValueChange={handleChangeMinPrice}
+          id={minPriceId}
         />
+
         <span>{minPrice}</span>
       </div>
       <div>
