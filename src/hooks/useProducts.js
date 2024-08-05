@@ -1,22 +1,12 @@
 import { useEffect, useState } from "react";
-import { products as initialProducts } from "../mocks/products.json";
+import { fetchProducts } from "@/services/products";
 
-export function useProducts() {
+export function useProducts(page) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const mappedProducts = initialProducts.map((product) => {
-      return {
-        id: product.id,
-        title: product.title,
-        thumbnail: product.thumbnail,
-        price: product.price,
-        category: product.category,
-      };
-    });
-
-    setProducts(mappedProducts);
-  }, []);
+    fetchProducts(page).then((responseProducts) => setProducts(responseProducts));
+  }, [page]);
 
   return { products };
 }
