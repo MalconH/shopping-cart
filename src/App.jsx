@@ -11,7 +11,7 @@ function App() {
   const { filterProducts } = useFilters();
   const DEFAULT_PAGE = 1;
   const [page, setPage] = useState(DEFAULT_PAGE);
-  const { products } = useProducts(page);
+  const { products, maxPages } = useProducts(page);
 
   const filteredProducts = filterProducts(products);
 
@@ -23,7 +23,7 @@ function App() {
         <main>
           <Products products={filteredProducts} />
         </main>
-        <Pagination page={page} changePage={setPage} />
+        <Pagination page={page} changePage={setPage} maxPages={maxPages} />
       </CartProvider>
     </>
   );

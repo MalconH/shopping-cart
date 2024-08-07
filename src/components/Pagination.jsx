@@ -6,13 +6,10 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export function Pagination({ page, changePage }) {
-  // Total of products return from API / Max products p. page
-  const MAX_PAGES = Math.ceil(194 / 20);
-
+export function Pagination({ page, changePage, maxPages }) {
   const handlePageChange = (newPage) => {
     // Don't change pages if pagination is at first o last page.
-    if (newPage < 1 || newPage > MAX_PAGES) return;
+    if (newPage < 1 || newPage > maxPages) return;
     changePage(newPage);
     window.scrollTo(0, 0);
   };
@@ -37,10 +34,10 @@ export function Pagination({ page, changePage }) {
 
           <PaginationItem>
             <PaginationNext
-              aria-disabled={page === MAX_PAGES}
-              tabIndex={page === MAX_PAGES ? -1 : undefined}
+              aria-disabled={page === maxPages}
+              tabIndex={page === maxPages ? -1 : undefined}
               className={
-                (page === MAX_PAGES ? "pointer-events-none opacity-50" : "") +
+                (page === maxPages ? "pointer-events-none opacity-50" : "") +
                 " cursor-pointer select-none"
               }
               onClick={() => handlePageChange(page + 1)}
