@@ -23,7 +23,7 @@ function App() {
         <main>
           <Products products={filteredProducts} />
         </main>
-        <Pagination page={page} changePage={setPage} maxPages={maxPages} />
+        {maxPages > 1 && <Pagination page={page} changePage={setPage} maxPages={maxPages} />}
       </CartProvider>
     </>
   );
