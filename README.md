@@ -45,6 +45,11 @@ pnpm run build
 pnpm run preview
 ```
 
+## Links
+
+- Look the [project code](/src/).
+- Visit this [website](https://malconh.github.io/shopping-cart) to view the app.
+
 ## Credits
 
 Thanks to [Midu](https://twitter.com/midudev) for his React course, I built this project following his course (though I added some features and changes). Midu is such a great dev and teacher, all credits to him!
