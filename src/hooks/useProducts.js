@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import { products as initialProducts } from "../mocks/products.json";
+import { fetchProducts } from "@/services/products";
+import { PRODUCTS_LIMIT as PRODUCTS_PER_PAGE } from "@/services/products";
+import { useContext } from "react";
+import { useFilters } from "./useFilters";
 
-export function useProducts() {
+export function useProducts(page) {
+  const { filters } = useFilters();
   const [products, setProducts] = useState([]);
+  const [maxPages, setMaxPages] = useState();
 
   useEffect(() => {
-    const mappedProducts = initialProducts.map((product) => {
-      return {
-        id: product.id,
-        title: product.title,
-        thumbnail: product.thumbnail,
-        price: product.price,
-        category: product.category,
-      };
+    fetchProducts(page, filters.category).then((response) => {
+      setProducts(response.products);
+      setMaxPages(Math.ceil(response.total / PRODUCTS_PER_PAGE));
     });
+  }, [page, filters]);
 
-    setProducts(mappedProducts);
-  }, []);
-
-  return { products };
+  return { products, maxPages };
 }

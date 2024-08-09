@@ -13,10 +13,15 @@ import { Slider } from "@/components/ui/slider";
 import { useId } from "react";
 import "./Filters.css";
 import { useFilters } from "../hooks/useFilters";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getCategories } from "@/services/products";
+import { translateCategory } from "@/lib/utils";
 
 export function Filters() {
   const minPriceId = useId();
   const categoryId = useId();
+  const [categories, setCategories] = useState([]);
 
   const { filters, changeFilter } = useFilters();
 
@@ -29,6 +34,10 @@ export function Filters() {
   const handleChangeCategory = (value) => {
     changeFilter("category", value);
   };
+
+  useEffect(() => {
+    getCategories().then((newCategories) => setCategories(newCategories));
+  }, []);
 
   return (
     <div className="filters">
@@ -54,8 +63,11 @@ export function Filters() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todo</SelectItem>
-            <SelectItem value="laptops">Notebooks</SelectItem>
-            <SelectItem value="smartphones">Celulares</SelectItem>
+            {categories.map((category) => (
+              <SelectItem key={category} value={category}>
+                {translateCategory(category)}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
